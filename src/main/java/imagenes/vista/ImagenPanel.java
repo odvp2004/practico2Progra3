@@ -25,7 +25,10 @@ public class ImagenPanel extends JPanel implements MouseListener, PropertyChange
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(modelo.getWidth(), modelo.getHeight());
+        if(modelo.getWidth() > 0 && modelo.getHeight()>0){
+            return new Dimension(modelo.getWidth(), modelo.getHeight());
+        }
+        return new Dimension(500,400);
     }
 
     @Override
@@ -43,7 +46,7 @@ public class ImagenPanel extends JPanel implements MouseListener, PropertyChange
     @Override
     public void mousePressed(MouseEvent e) {
         if (rightpanel.getHerramienta().isSelected()) {
-            modelo.pintar(e.getPoint(), rightpanel.getColorActual().getRGB());
+            modelo.pintar(e.getPoint(), rightpanel.getColorActual().getRGB(),rightpanel.getRango());
         }
     }
 

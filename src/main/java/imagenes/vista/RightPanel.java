@@ -15,13 +15,11 @@ public class RightPanel extends JPanel {
     private JToggleButton herramienta;
     private Color colorActual;
     private static final Logger logger = LogManager.getRootLogger();
-
     private JLabel infoImagenLabel;
-
     private JLabel rangoLabel;
     private JSpinner rangoSpinner;
 
-    public RightPanel(Imagen modelo) {
+    public RightPanel() {
         super(new GridBagLayout());
         colorActual = Color.WHITE;
 
@@ -30,7 +28,7 @@ public class RightPanel extends JPanel {
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 0, 25, 25);
 
-        infoImagenLabel = new JLabel("Imagen: " + modelo.getNombreImagen());
+        infoImagenLabel = new JLabel("Imagen: ");
 
         add(infoImagenLabel, gbc);
 
@@ -56,21 +54,19 @@ public class RightPanel extends JPanel {
         });
 
         add(actualColorButton, gbc);
-
-        gbc.gridy++;
-        rangoLabel = new JLabel("Rango: " + modelo.getRango());
-        add(rangoLabel, gbc);
         gbc.gridy++;
 
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(10, 10, 50, 10);
-
-
         rangoSpinner = new JSpinner(spinnerModel);
+
+        rangoLabel = new JLabel("Rango: " + rangoSpinner.getValue());
+        add(rangoLabel, gbc);
+        gbc.gridy++;
+
 
         rangoSpinner.addChangeListener(e -> {
             int nuevoRango = (int) rangoSpinner.getValue();
-            modelo.setRango(nuevoRango);
-            rangoLabel.setText("Rango: " + modelo.getRango());
+            rangoLabel.setText("Rango: " + nuevoRango);
         });
 
         add(rangoSpinner, gbc);
@@ -95,6 +91,10 @@ public class RightPanel extends JPanel {
 
     public JToggleButton getHerramienta() {
         return herramienta;
+    }
+
+    public int getRango(){
+        return (int) rangoSpinner.getValue();
     }
 
     public void setColorActual(Color color) {

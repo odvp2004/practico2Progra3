@@ -3,10 +3,8 @@ package imagenes.LectorDeImagen;
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +16,7 @@ public class GuardarImagen {
 
         String DIRECTORIO_DESTINO = "D:\\nuevasImagenes\\";
 
-        BufferedImage imagen = modelo.getImagen();
+        BufferedImage imagen = new BufferedImage(modelo.getWidth(), modelo.getHeight(), BufferedImage.TYPE_INT_RGB);
         try {
             for (int x = 0; x < modelo.getWidth(); x++) {
                 for (int y = 0; y < modelo.getHeight(); y++) {

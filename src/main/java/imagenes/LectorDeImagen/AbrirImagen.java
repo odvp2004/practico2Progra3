@@ -3,10 +3,8 @@ package imagenes.LectorDeImagen;
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +25,19 @@ public class AbrirImagen {
             try {
                 BufferedImage imagenActual = ImageIO.read(archivoSeleccionado);
 
-                modelo.setPixeles(imagenActual);
+                int width = imagenActual.getWidth();
+                int height = imagenActual.getHeight();
+
+                int[][] pixeles = new int[width][height];
+
+                for (int i = 0; i < width; i++) {
+                    for (int j = 0; j < height; j++) {
+                        int color = imagenActual.getRGB(i, j);
+                        pixeles[i][j] = color;
+                    }
+                }
+                modelo.setPixeles(pixeles);
+                parent.pack();
                 logger.info("La imagen se obtuvo correctamente para ser abierta");
             } catch (IOException ex) {
                 logger.error("No se pudo cargar la imagen");

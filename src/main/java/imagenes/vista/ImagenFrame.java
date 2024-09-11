@@ -26,9 +26,9 @@ public class ImagenFrame extends JFrame {
     }
 
     private void init() {
-        modelo = new Imagen("dino.jpg");
+        modelo = new Imagen();
 
-        rightPanel = new RightPanel(modelo);
+        rightPanel = new RightPanel();
         rightPanel.setPreferredSize(new Dimension(200, 0));
 
         centerPanel = new ImagenPanel(modelo, rightPanel);
@@ -58,6 +58,7 @@ public class ImagenFrame extends JFrame {
         jMenubar = new JMenuBar();
         jMenubar.add(jMenu);
         setJMenuBar(jMenubar);
+        centerPanel.setPreferredSize(new Dimension(500,400));
 
         this.pack();
         this.setVisible(true);
