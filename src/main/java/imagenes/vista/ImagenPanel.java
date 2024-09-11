@@ -34,7 +34,6 @@ public class ImagenPanel extends JPanel implements MouseListener, PropertyChange
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        logger.debug("Pinta los componentes");
         modelo.dibujar(g);
     }
 
@@ -68,7 +67,7 @@ public class ImagenPanel extends JPanel implements MouseListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getSource() instanceof Imagen) {
-            logger.info("Han ocurrido cambios en el modelo");
+            logger.info("Se ha detectado cambios en el modelo");
             repaint();
         }
     }

@@ -1,7 +1,4 @@
-package imagenes.FloodFill;
-
-import java.awt.*;
-import java.util.Stack;
+package imagenes.floodFill;
 
 public class FloodFill {
 

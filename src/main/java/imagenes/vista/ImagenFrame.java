@@ -1,7 +1,7 @@
 package imagenes.vista;
 
-import imagenes.LectorDeImagen.AbrirImagen;
-import imagenes.LectorDeImagen.GuardarImagen;
+import imagenes.manejoDeImagen.AbrirImagen;
+import imagenes.manejoDeImagen.GuardarImagen;
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,12 +44,9 @@ public class ImagenFrame extends JFrame {
             logger.info("Se ha cerrado el programa");
             System.exit(0);
         });
-        nuevoItem.addActionListener(e -> {
-            AbrirImagen abrirImagen = new AbrirImagen(this, modelo);
-        });
-        guardarItem.addActionListener(e -> {
-            GuardarImagen guardarImagen = new GuardarImagen(this, modelo);
-        });
+
+        nuevoItem.addActionListener(e -> new AbrirImagen(this, modelo));
+        guardarItem.addActionListener(e -> new GuardarImagen(this, modelo));
 
         jMenu = new JMenu("Archivo");
         jMenu.add(nuevoItem);

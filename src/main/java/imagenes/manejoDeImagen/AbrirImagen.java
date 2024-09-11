@@ -1,4 +1,4 @@
-package imagenes.LectorDeImagen;
+package imagenes.manejoDeImagen;
 
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
@@ -24,6 +24,7 @@ public class AbrirImagen {
 
             try {
                 BufferedImage imagenActual = ImageIO.read(archivoSeleccionado);
+                logger.info("La imagen se obtuvo correctamente para ser abierta");
 
                 int width = imagenActual.getWidth();
                 int height = imagenActual.getHeight();
@@ -38,7 +39,7 @@ public class AbrirImagen {
                 }
                 modelo.setPixeles(pixeles);
                 parent.pack();
-                logger.info("La imagen se obtuvo correctamente para ser abierta");
+
             } catch (IOException ex) {
                 logger.error("No se pudo cargar la imagen");
                 JOptionPane.showMessageDialog(parent, "Error al abrir la imagen.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -1,15 +1,12 @@
 package imagenes.modelo;
 
-import imagenes.FloodFill.FloodFill;
+import imagenes.floodFill.FloodFill;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.util.Arrays;
 
 public class Imagen {
@@ -34,14 +31,14 @@ public class Imagen {
         this.width = pixeles.length;
         this.height = pixeles[0].length;
 
-        supportObserver.firePropertyChange(OBSERVER_PIXELES, oldPixeles, pixeles);
         logger.info("Se han establecido un nuevo grupo de pixeles en la matriz");
+        supportObserver.firePropertyChange(OBSERVER_PIXELES, oldPixeles, pixeles);
+
     }
 
     public void pintar(Point point, int color, int rango) {
+        logger.info("Se han pintado pixeles con la cubeta");
         setPixeles(painter.floodFill(pixeles, point.x, point.y, color, rango));
-        logger.info("Se han pintado pixeles");
-
     }
 
     public void addObserver(PropertyChangeListener observer) {
@@ -56,7 +53,7 @@ public class Imagen {
                 g.fillRect(i, j, 1, 1);
             }
         }
-        logger.debug("Se han pintado los pixeles");
+        logger.debug("Se han pintado los pixeles en el panel principal");
     }
 
     public int getWidth() {

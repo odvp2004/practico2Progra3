@@ -1,4 +1,4 @@
-package imagenes.LectorDeImagen;
+package imagenes.manejoDeImagen;
 
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
