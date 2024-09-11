@@ -118,7 +118,7 @@ public class Imagen {
         return nombreImagen;
     }
 
-    public void setImagen(BufferedImage newImagen) {
+    public void setPixeles(BufferedImage newImagen) {
         BufferedImage oldImage = imagen;
         imagen = newImagen;
         width = imagen.getWidth();
