@@ -45,7 +45,7 @@ public class ImagenPanel extends JPanel implements MouseListener, PropertyChange
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (rightpanel.getHerramienta().isSelected()) {
+        if (rightpanel.getHerramienta().isSelected() && modelo.contains(e.getPoint())) {
             modelo.pintar(e.getPoint(), rightpanel.getColorActual().getRGB(),rightpanel.getRango());
         }
     }

@@ -71,6 +71,9 @@ public class Imagen {
         return pixeles;
     }
 
+    public boolean contains(Point point){
+        return (point.x > 0 && point.x < width && point.y > 0 && point.y <height);
+    }
 
 
 }
