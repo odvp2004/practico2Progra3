@@ -1,7 +1,9 @@
 package imagenes.vista;
 
+import imagenes.excepciones.ImagenException;
 import imagenes.manejoDeImagen.AbrirImagen;
 import imagenes.manejoDeImagen.GuardarImagen;
+import imagenes.manejoDeImagen.IManejoDeImagen;
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,13 +42,14 @@ public class ImagenFrame extends JFrame {
         nuevoItem = new JMenuItem("Cargar Imagen");
         guardarItem = new JMenuItem("Guardar Imagen");
         salirItem = new JMenuItem("Salir");
+
         salirItem.addActionListener(e -> {
             logger.info("Se ha cerrado el programa");
             System.exit(0);
         });
 
-        nuevoItem.addActionListener(e -> new AbrirImagen(this, modelo));
-        guardarItem.addActionListener(e -> new GuardarImagen(this, modelo));
+        nuevoItem.addActionListener(e -> manejarImagen(new AbrirImagen()));
+        guardarItem.addActionListener(e -> manejarImagen(new GuardarImagen()));
 
         jMenu = new JMenu("Archivo");
         jMenu.add(nuevoItem);
@@ -61,5 +64,13 @@ public class ImagenFrame extends JFrame {
         this.setVisible(true);
     }
 
+    private void manejarImagen(IManejoDeImagen manejoDeImagen){
+        try{
+            manejoDeImagen.hacer(this, modelo);
+        }catch (ImagenException e){
+            e.printStackTrace();
+        }
+
+    }
 
 }

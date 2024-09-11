@@ -1,5 +1,6 @@
 package imagenes.manejoDeImagen;
 
+import imagenes.excepciones.ImagenException;
 import imagenes.modelo.Imagen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,12 +10,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GuardarImagen {
-    private static final Logger logger = LogManager.getRootLogger();
+public class GuardarImagen implements IManejoDeImagen{
 
-    public GuardarImagen(JFrame parent, Imagen modelo) {
+    @Override
+    public void hacer(JFrame parent, Imagen modelo) throws ImagenException{
 
         String DIRECTORIO_DESTINO = "D:\\nuevasImagenes\\";
+
+        if(modelo.getHeight() <=0 | modelo.getWidth() <= 0){
+            throw new ImagenException(ImagenException.IMAGEN_NULA_MESSAGE);
+        }
 
         BufferedImage imagen = new BufferedImage(modelo.getWidth(), modelo.getHeight(), BufferedImage.TYPE_INT_RGB);
         try {
@@ -25,12 +30,16 @@ public class GuardarImagen {
                 }
             }
             String nombreImagen = JOptionPane.showInputDialog(parent, "Ingrese el nombre del archivo:", "Guardar Imagen", JOptionPane.PLAIN_MESSAGE);
+
+            if(nombreImagen == null){return;}
+            if(nombreImagen.isEmpty()){throw new ImagenException(ImagenException.NOMBRE_VACIO_IMAGEN_MESSAGE);}
+            if(!nombreImagen.matches("[a-zA-Z0-9 ]+")){throw new ImagenException(ImagenException.NOMBRE_INVALIDO_IMAGEN_MESSAGE);}
+
             File archivoSalida = new File(DIRECTORIO_DESTINO + nombreImagen + ".png");
             ImageIO.write(imagen, "png", archivoSalida);
-            logger.info("Imagen guardada en: " + DIRECTORIO_DESTINO);
 
         } catch (IOException e) {
-            logger.error("No se pudo guardar la imagen");
+            e.printStackTrace();
         }
     }
 }
