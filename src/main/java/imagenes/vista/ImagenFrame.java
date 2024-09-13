@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 public class ImagenFrame extends JFrame {
@@ -22,15 +24,14 @@ public class ImagenFrame extends JFrame {
     private static final Logger logger = LogManager.getRootLogger();
 
 
-    public ImagenFrame() {
+    public ImagenFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         init();
     }
 
     private void init() {
         modelo = new Imagen();
-
-        rightPanel = new RightPanel();
+        rightPanel = new RightPanel(modelo);
         rightPanel.setPreferredSize(new Dimension(200, 0));
 
         centerPanel = new ImagenPanel(modelo, rightPanel);
@@ -67,10 +68,11 @@ public class ImagenFrame extends JFrame {
     private void manejarImagen(IManejoDeImagen manejoDeImagen){
         try{
             manejoDeImagen.hacer(this, modelo);
+            logger.info("El manejo de la imagen ha sido exitoso");
         }catch (ImagenException e){
+            logger.error("El manejo de la imagen tubo un error");
             e.printStackTrace();
         }
 
     }
-
 }

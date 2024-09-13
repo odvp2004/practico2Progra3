@@ -16,7 +16,7 @@ public class AbrirImagen implements IManejoDeImagen{
     @Override
     public void hacer(JFrame parent, Imagen modelo) throws ImagenException {
         JFileChooser fileChooser = new JFileChooser();
-        String DIRECTORIO_RECURSOS = "D:\\NUR\\3er Semestre\\pr2v2\\src\\main\\java\\imagenes\\ejemplos";
+        String DIRECTORIO_RECURSOS = "D:\\NUR\\3er Semestre\\Programacion-III\\pr2v2\\src\\main\\java\\imagenes\\ejemplos";
         fileChooser.setCurrentDirectory(new File(DIRECTORIO_RECURSOS));
 
         fileChooser.setDialogTitle("Abrir Imagen");

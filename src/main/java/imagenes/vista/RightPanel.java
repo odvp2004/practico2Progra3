@@ -6,29 +6,32 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
-public class RightPanel extends JPanel {
+public class RightPanel extends JPanel implements PropertyChangeListener {
 
     private JButton actualColorButton;
     private JToggleButton herramienta;
     private Color colorActual;
+    private Imagen modelo;
     private static final Logger logger = LogManager.getRootLogger();
     private JLabel infoImagenLabel;
     private JLabel rangoLabel;
     private JSpinner rangoSpinner;
 
-    public RightPanel() {
+    public RightPanel(Imagen modelo) {
         super(new GridBagLayout());
         colorActual = Color.WHITE;
+        this.modelo = modelo;
+        modelo.addObserver(this);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 0, 25, 25);
 
-        infoImagenLabel = new JLabel("Imagen: ");
+        infoImagenLabel = new JLabel("Dimensiones: " );
 
         add(infoImagenLabel, gbc);
 
@@ -104,5 +107,10 @@ public class RightPanel extends JPanel {
 
     public Color getColorActual() {
         return colorActual;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        infoImagenLabel.setText("Dimension: " + modelo.getWidth() + " x " + modelo.getHeight());
     }
 }

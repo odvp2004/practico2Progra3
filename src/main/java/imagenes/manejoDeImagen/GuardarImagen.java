@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GuardarImagen implements IManejoDeImagen{
+    private static final Logger logger = LogManager.getRootLogger();
 
     @Override
     public void hacer(JFrame parent, Imagen modelo) throws ImagenException{
@@ -37,6 +38,7 @@ public class GuardarImagen implements IManejoDeImagen{
 
             File archivoSalida = new File(DIRECTORIO_DESTINO + nombreImagen + ".png");
             ImageIO.write(imagen, "png", archivoSalida);
+            logger.info("La imagen se guardó correctamente en " + DIRECTORIO_DESTINO);
 
         } catch (IOException e) {
             e.printStackTrace();
